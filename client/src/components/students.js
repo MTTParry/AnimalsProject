@@ -1,44 +1,46 @@
 import { useState, useEffect } from "react";
 import Form from "./form";
 
-function Students() {
+function Animals() {
+  const [animals, setAnimals] = useState([]);
 
-    const [students, setStudents] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5005/api/animals")
+      .then((response) => response.json())
+      .then((animals) => {
+        //setStudents((students[3]));
+        //console.log("Testing", typeof students);
+        for (let index in animals) {
+          if (index !== "3") {
+            setAnimals(animals);
+          }
+        }
+      });
+  }, []);
 
-    useEffect(() => {
-        fetch("http://localhost:5005/api/students")
-        .then((response) => response.json())
-        .then(students =>{
-            //setStudents((students[3]));
-            //console.log("Testing", typeof students);
-            for (let index in students){
-               if( index !== "3"){
-                   setStudents(students);
-               }
-            };       
-        })
-        
-    }, []);
+  const addAnimal = (newAnimal) => {
+    //console.log(newStudent);
+    //postStudent(newStudent);
+    setAnimals((animals) => [...animals, newAnimal]);
+  };
 
-    
+  return (
+    <div className="animals">
+      <h2> List of Animals</h2>
+      <ul>
+        {animals.map((animal) => (
+          <li key={animal.id}>
+            {" "}
+            {animal.commonname} or {animal.scientificname},
+            <br />
+            is {animal.conservationstatus} with an estimated{" "}
+            {animal.estimatedlivingwild} living in the wild.
+          </li>
+        ))}
+      </ul>
+      <Form addAnimal={addAnimal} />
+    </div>
+  );
+}
 
-    const addStudent = (newStudent) => {
-        //console.log(newStudent);
-        //postStudent(newStudent);
-        setStudents((students) => [...students, newStudent]);
-    }
-
-
-    return (
-      <div className="students">
-        <h2> List of Students </h2>
-        <ul>
-            {students.map(student =>
-                <li key={student.id}> {student.firstname} {student.lastname}</li>)}
-        </ul>
-        <Form addStudent={addStudent} />
-      </div>
-    );
-  }
-  
-  export default Students;
+export default Animals;
