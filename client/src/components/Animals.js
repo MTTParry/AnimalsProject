@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Form from "./form";
+import AnimalsForm from "./AnimalsForm";
 
 function Animals() {
   const [animals, setAnimals] = useState([]);
@@ -10,35 +10,31 @@ function Animals() {
       .then((animals) => {
         //setStudents((students[3]));
         //console.log("Testing", typeof students);
-        for (let index in animals) {
-          if (index !== "3") {
-            setAnimals(animals);
-          }
-        }
+        setAnimals(animals);
       });
   }, []);
 
   const addAnimal = (newAnimal) => {
-    //console.log(newStudent);
-    //postStudent(newStudent);
+    console.log(newAnimal);
+    //postAnimal(newAnimal);
     setAnimals((animals) => [...animals, newAnimal]);
   };
 
   return (
     <div className="animals">
-      <h2> List of Animals</h2>
+      <h2> List of Animal Species</h2>
       <ul>
         {animals.map((animal) => (
           <li key={animal.id}>
             {" "}
-            {animal.commonname} or {animal.scientificname},
+            {animal.commonname} or <i>{animal.scientificname}</i>,
             <br />
             is {animal.conservationstatus} with an estimated{" "}
             {animal.estimatedlivingwild} living in the wild.
           </li>
         ))}
       </ul>
-      <Form addAnimal={addAnimal} />
+      <AnimalsForm addAnimal={addAnimal} />
     </div>
   );
 }

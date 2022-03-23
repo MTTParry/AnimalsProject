@@ -13,7 +13,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Hello from My ExpressJS" });
 });
-
+// SPECIES //
 //create the get request
 app.get("/api/animals", cors(), async (req, res) => {
   // const STUDENTS = [
@@ -26,7 +26,7 @@ app.get("/api/animals", cors(), async (req, res) => {
   // ];
   // res.json(STUDENTS);
   try {
-    const { rows: animals } = await db.query("SELECT * FROM animals");
+    const { rows: animals } = await db.query("SELECT * FROM species");
     res.send(animals);
   } catch (e) {
     return res.status(400).json({ e });
@@ -35,14 +35,93 @@ app.get("/api/animals", cors(), async (req, res) => {
 
 //create the POST request
 app.post("/api/animals", cors(), async (req, res) => {
-  const newUser = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+  const newAnimal = {
+    commonname: req.body.commonname,
+    scientificname: req.body.scientificname,
+    estimatedlivingwild: req.body.estimatedlivingwild,
+    conservationstatus: req.body.conservationstatus,
   };
-  console.log([newUser.firstname, newUser.lastname]);
+  console.log([
+    newAnimal.commonname,
+    newAnimal.scientificname,
+    newAnimal.estimatedlivingwild,
+    newAnimal.conservationstatus,
+  ]);
   const result = await db.query(
-    "INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *",
-    [newUser.firstname, newUser.lastname]
+    "INSERT INTO species (commonname, scientificname, estimatedlivingwild, conservationstatus, CreationTimeStamp) VALUES($1, $2, $3, $4, current_timestamp) RETURNING *",
+    [
+      newAnimal.commonname,
+      newAnimal.scientificname,
+      newAnimal.estimatedlivingwild,
+      newAnimal.conservationstatus,
+    ]
+  );
+  console.log("Post animal row 0", result.rows[0]);
+  res.json(result.rows[0]);
+});
+
+// INDIVIDUALS //
+//create the get request
+app.get("/api/animalindividuals", cors(), async (req, res) => {
+  try {
+    const { rows: animals } = await db.query("SELECT * FROM individuals");
+    res.send(animals);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+//create the POST request
+app.post("/api/animalindividuals", cors(), async (req, res) => {
+  const newIndividual = {
+    nickName: req.body.nickName,
+    species: req.body.species,
+  };
+  console.log([newIndividual.nickName, newIndividual.species]);
+  const result = await db.query(
+    "INSERT INTO individuals (nickName, species, CreationTimestamp) VALUES($1, $2, current_timestamp) RETURNING *",
+    [newIndividual.nickName, newIndividual.species]
+  );
+  console.log(result.rows[0]);
+  res.json(result.rows[0]);
+});
+
+// SIGHTINGS //
+//create the get request
+app.get("/api/animalsightings", cors(), async (req, res) => {
+  try {
+    const { rows: animals } = await db.query("SELECT * FROM sightings");
+    res.send(animals);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+//create the POST request
+app.post("/api/animalsightings", cors(), async (req, res) => {
+  const newSighting = {
+    datetime: req.body.datetime,
+    individualnickname: req.body.individualnickName,
+    location: req.body.location,
+    healthy: req.body.healthy,
+    emailsighter: req.body.emailSighter,
+  };
+  console.log([
+    newSighting.datetime,
+    newSighting.individualnickname,
+    newSighting.location,
+    newSighting.healthy,
+    newSighting.emailsighter,
+  ]);
+  const result = await db.query(
+    "INSERT INTO animals(datetime, individualnickname, location, healthy, emailsighter, creationtimestamp) VALUES($1, $2, $3, $4, $5, current_timestamp) RETURNING *",
+    [
+      newSighting.datetime,
+      newSighting.individualnickname,
+      newSighting.location,
+      newSighting.healthy,
+      newSighting.emailsighter,
+    ]
   );
   console.log(result.rows[0]);
   res.json(result.rows[0]);
