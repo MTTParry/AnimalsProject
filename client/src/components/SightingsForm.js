@@ -53,7 +53,7 @@ const SightingsForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setSighting(sighting);
     postSighting(sighting);
     props.addSighting(sighting);
@@ -99,7 +99,7 @@ const SightingsForm = (props) => {
         <input
           type="text"
           id="add-conversation-status"
-          placeholder="True or False"
+          placeholder="true or false"
           required
           value={sighting.healthy}
           onChange={handleHealthy}
