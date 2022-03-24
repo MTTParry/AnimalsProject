@@ -54,7 +54,7 @@ const SightingsForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSighting(sighting);
+    // setSighting(sighting); // redundant
     postSighting(sighting);
     props.addSighting(sighting);
     setSighting(emptySighting);
@@ -89,6 +89,7 @@ const SightingsForm = (props) => {
         <input
           type="text"
           id="add-location"
+          placeholder="They were seen at..."
           required
           value={sighting.location}
           onChange={handleLocation}
@@ -97,13 +98,13 @@ const SightingsForm = (props) => {
 
         <label>Did they appear healthy?</label>
         <input
-          type="text"
-          id="add-conversation-status"
-          placeholder="true or false"
-          required
+          type="radio"
+          id="add-health-status"
           value={sighting.healthy}
           onChange={handleHealthy}
         />
+        <label for="add-health-status"></label>
+
         <br />
 
         <label>Please enter your email</label>

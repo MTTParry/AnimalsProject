@@ -20,6 +20,14 @@ function Sightings() {
     setSightings((sightings) => [...sightings, newSighting]);
   };
 
+  function boolToStr(input) {
+    if (input === true) {
+      return "healthy";
+    } else {
+      return "not healthy";
+    }
+  }
+
   return (
     <div className="sightings">
       <h2> List of Animal Sightings</h2>
@@ -29,8 +37,10 @@ function Sightings() {
             {sighting.individualnickname} was spotted in {sighting.location} at{" "}
             {sighting.datetime}.
             <br />
+            {sighting.individualnickname} appeared to be {boolToStr(sighting.healthy)}.
+            <br/>
             To contact the spotter, please email them at {sighting.emailsighter}
-            .
+            .<hr></hr>
           </li>
         ))}
       </ul>

@@ -49,7 +49,7 @@ const AnimalsForm = (props) => {
   // ASK FOR HELP
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setAnimal(animal);
+    // setAnimal(animal);
     await postAnimal(animal);
     // ignores promise
     props.addAnimal(animal);
@@ -92,14 +92,19 @@ const AnimalsForm = (props) => {
         <br />
 
         <label>Conservation Status</label>
-        <input
-          type="text"
-          id="add-conversation-status"
-          placeholder="eg, LC (least concern), EX (extinct), EN (endangered)"
-          required
-          value={animal.conservationstatus}
-          onChange={handleStatusChange}
-        />
+        <select name="consevationstatus" onChange={handleStatusChange} required>
+          <option hidden>Select</option>
+          <option value="LC">LC - Least Concern</option>
+          <option value="NT">NC - Near Threatened</option>
+          <option value="VU">VU - Vulnerable</option>
+          <option value="EN">EN - Endangered</option>
+          <option value="CR">CR - Critically Endangered</option>
+          <option value="EW">EW - Extinct in the Wild</option>
+          <option value="EX">EX - Extinct</option>
+          <option value="DD">DD - Data Deficient</option>
+          <option value="NE">NE - Not Evaluated</option>
+        </select>
+        <br />
       </fieldset>
       <button type="submit">Add</button>
     </form>

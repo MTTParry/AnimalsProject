@@ -28,10 +28,11 @@ function Animals() {
         {animals.map((animal) => (
           <li key={animal.id}>
             {" "}
-            {animal.commonname} or <i>{animal.scientificname}</i>,
+            <b>{animal.commonname}</b> or <i>{animal.scientificname}</i>,
             <br />
             is {animal.conservationstatus} with an estimated{" "}
             {animal.estimatedlivingwild} living in the wild.
+            <hr></hr>
           </li>
         ))}
       </ul>
