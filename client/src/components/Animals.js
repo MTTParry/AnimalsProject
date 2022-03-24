@@ -5,6 +5,7 @@ function Animals() {
   const [animals, setAnimals] = useState([]);
 
   useEffect(() => {
+    // it's called 'animal' but it's species
     fetch("http://localhost:5005/api/animals")
       .then((response) => response.json())
       .then((animals) => {
