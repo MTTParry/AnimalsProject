@@ -1,7 +1,6 @@
 import { useState } from "react";
 import SpeciesDropDown from "./SpeciesDropDown";
 
-
 const IndividualsForm = (props) => {
   const emptyIndividual = {
     nickname: "",
@@ -21,10 +20,9 @@ const IndividualsForm = (props) => {
     setIndividual((individual) => ({ ...individual, species }));
   };
 
-
   //A function to handle the post request
   const postIndividual = (newIndividual) => {
-    return fetch("http://localhost:animalindividuals/api/animals", {
+    return fetch("http://localhost:5005/api/animalindividuals", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newIndividual),
@@ -37,7 +35,6 @@ const IndividualsForm = (props) => {
       });
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     await postIndividual(individual);
@@ -60,8 +57,7 @@ const IndividualsForm = (props) => {
         <br />
 
         <label>Species</label>
-        <SpeciesDropDown handleSpecies={handleSpecies}/>
-
+        <SpeciesDropDown handleSpecies={handleSpecies} />
       </fieldset>
       <button type="submit">Add</button>
     </form>
