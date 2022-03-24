@@ -60,6 +60,13 @@ const SightingsForm = (props) => {
     setSighting(emptySighting);
   };
 
+  function strToBool(input) {
+    if (input === "true") {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
@@ -96,14 +103,27 @@ const SightingsForm = (props) => {
         />
         <br />
 
-        <label>Did they appear healthy?</label>
+        <p>Did they appear healthy?</p>
         <input
           type="radio"
-          id="add-health-status"
-          value={sighting.healthy}
+          id="healthy-individual"
+          value={strToBool("true")}
           onChange={handleHealthy}
+          name="health-status"
         />
-        <label for="add-health-status"></label>
+        <label for="healthy" value="true">
+          Yes
+        </label>
+        <input
+          type="radio"
+          id="unhealthy-individual"
+          value={strToBool("false")}
+          onChange={handleHealthy}
+          name="health-status"
+        />
+        <label for="unhealthy" value="false">
+          No
+        </label>
 
         <br />
 
