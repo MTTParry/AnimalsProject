@@ -1,41 +1,30 @@
 import { useState } from "react";
 
 const SightingsForm = (props) => {
-  const emptySighting = {
+  const emptySighting = Object.freeze({
     datetime: "",
     individualnickname: "",
     location: "",
-    healthy: "",
+    healthy: false,
     emailsighter: "",
-  };
+  });
 
-  const [sighting, setSighting] = useState({ emptySighting });
+  const [sighting, setSighting] = useState(emptySighting);
+  console.log(sighting)
 
-  //create functions that handle the event of the user typing into the form
-  const handleDateTime = (event) => {
-    const datetime = event.target.value;
-    setSighting((sighting) => ({ ...sighting, datetime }));
-  };
-
-  const handleIndividualNickName = (event) => {
-    const individualnickname = event.target.value;
-    setSighting((sighting) => ({ ...sighting, individualnickname }));
-  };
-
-  const handleLocation = (event) => {
-    const location = event.target.value;
-    setSighting((sighting) => ({ ...sighting, location }));
-  };
-
-  const handleHealthy = (event) => {
-    const healthy = event.target.value;
-    setSighting((sighting) => ({ ...sighting, healthy }));
-  };
-
-  const handleEmailSighter = (event) => {
-    const emailsighter = event.target.value;
-    setSighting((sighting) => ({ ...sighting, emailsighter }));
-  };
+  const handleTextChange = (e) => {
+    setSighting({
+      ...sighting,
+      [e.target.name]: e.target.value.trim()
+    })
+  }
+  
+  const handleBoolChange = (e) => {
+    setSighting({
+      ...sighting,
+      [e.target.name]: e.target.checked
+    })
+  }
 
   //A function to handle the post request
   const postSighting = (newSighting) => {
@@ -45,23 +34,30 @@ const SightingsForm = (props) => {
       body: JSON.stringify(newSighting),
     })
       .then((response) => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response
+        }
       })
       .then((data) => {
         console.log("From the post ", data);
+        props.addSighting(newSighting);
+        setSighting(emptySighting);
+      })
+      .catch((error) => {
+        // handle error?
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSighting(sighting);
+    // setSighting(sighting);
     postSighting(sighting);
-    props.addSighting(sighting);
-    setSighting(emptySighting);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="sighting" onSubmit={handleSubmit}>
       <fieldset>
         <label>Individual's Nickname</label>
         <input
@@ -70,9 +66,19 @@ const SightingsForm = (props) => {
           placeholder="Spot"
           required
           value={sighting.individualnickname}
-          onChange={handleIndividualNickName}
+          name="individualnickname"
+          onChange={handleTextChange}
         />
         <br />
+
+        <FormTextInput 
+          form="sighting"
+          label="Individual's Nickname"
+          placeholder="Fluffy"
+          value={sighting.individualnickname}
+          name="individualnickname"
+          callback={handleTextChange}
+        />
 
         <label>Date and Time of Sighting</label>
         <input
@@ -81,7 +87,8 @@ const SightingsForm = (props) => {
           placeholder="YYYY-MM-DD HR:MN:SC"
           required
           value={sighting.datetime}
-          onChange={handleDateTime}
+          name="datetime"
+          onChange={handleTextChange}
         />
         <br />
 
@@ -91,34 +98,54 @@ const SightingsForm = (props) => {
           id="add-location"
           required
           value={sighting.location}
-          onChange={handleLocation}
+          name="location"
+          onChange={handleTextChange}
         />
         <br />
 
-        <label>Did they appear healthy?</label>
+        <label for="add-healthy">Did they appear healthy?</label>
         <input
-          type="text"
-          id="add-conversation-status"
-          placeholder="true or false"
+          type="checkbox"
+          id="add-healthy"
           required
-          value={sighting.healthy}
-          onChange={handleHealthy}
+          name="healthy"
+          checked={sighting.healthy}
+          onChange={handleBoolChange}
         />
         <br />
 
         <label>Please enter your email</label>
         <input
           type="text"
-          id="add-conversation-status"
+          id="add-emailsighter"
           placeholder="name@email.com"
           required
           value={sighting.emailsighter}
-          onChange={handleEmailSighter}
+          name="emailsighter"
+          onChange={handleTextChange}
         />
       </fieldset>
       <button type="submit">Add</button>
     </form>
   );
 };
+
+const FormTextInput = (props) => {
+  return (
+    <>
+    <label for={props.name}>{props.label}</label>
+    <input
+      type="text"
+      id={props.form + "-" + props.name}
+      placeholder={props.placeholder}
+      required
+      value={props.value}
+      name={props.name}
+      onChange={props.callback}
+    />
+    <br />
+    </>
+  );
+}
 
 export default SightingsForm;
