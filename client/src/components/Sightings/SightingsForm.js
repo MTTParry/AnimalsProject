@@ -82,7 +82,7 @@ const SightingsForm = (props) => {
 
         <label>Date and Time of Sighting</label>
         <input
-          type="text"
+          type="datetime-local"
           id="add-date-time"
           placeholder="YYYY-MM-DD HR:MN:SC"
           required
