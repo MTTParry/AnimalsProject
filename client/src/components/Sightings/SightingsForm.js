@@ -1,4 +1,5 @@
 import { useState } from "react";
+import IndividualsDropDown from "./IndividualsDropDown";
 
 const SightingsForm = (props) => {
   const emptySighting = {
@@ -75,16 +76,9 @@ const SightingsForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
-        <label>Individual's Nickname</label>
-        <input
-          type="text"
-          id="add-nickname"
-          placeholder="Spot"
-          required
-          value={sighting.individualnickname}
-          onChange={handleIndividualNickName}
+        <IndividualsDropDown
+          handleIndividualNickName={handleIndividualNickName}
         />
-        <br />
 
         <label>Date and Time of Sighting</label>
         <input
@@ -106,35 +100,34 @@ const SightingsForm = (props) => {
           value={sighting.location}
           onChange={handleLocation}
         />
-        <br />
 
-        <p>Did they appear healthy?</p>
-        <input
-          type="radio"
-          id="healthy-individual"
-          value="true"
-          onChange={handleHealthy}
-          name="health-status"
-        />
-        <label for="healthy" value="true">
-          Yes
-        </label>
-        <input
-          type="radio"
-          id="unhealthy-individual"
-          value="false"
-          onChange={handleHealthy}
-          name="health-status"
-        />
-        <label for="unhealthy" value="false">
-          No
-        </label>
-
-        <br />
+        <p>
+          Did they appear healthy?
+          <input
+            type="radio"
+            id="healthy-individual"
+            value="true"
+            onChange={handleHealthy}
+            name="health-status"
+          />
+          <label for="healthy" value="true">
+            Yes
+          </label>
+          <input
+            type="radio"
+            id="unhealthy-individual"
+            value="false"
+            onChange={handleHealthy}
+            name="health-status"
+          />
+          <label for="unhealthy" value="false">
+            No
+          </label>
+        </p>
 
         <label>Please enter your email</label>
         <input
-          type="text"
+          type="email"
           id="add-conversation-status"
           placeholder="name@email.com"
           required
