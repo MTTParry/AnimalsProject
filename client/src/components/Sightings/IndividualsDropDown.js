@@ -14,8 +14,8 @@ const IndividualsDropDown = (prop) => {
   //Listing Individuals
   return (
     <div>
-      <label>Individuals</label>
-      <select classname="dropdowns" onChange={prop.handleIndividualNickName} required>
+      <label>Individuals*</label> {"      "}
+      <select onChange={prop.handleIndividualNickName} required>
         <option hidden>Select</option>
         {individuals.map((individual) => (
           <option value={individual.nickname} key={individual.id}>

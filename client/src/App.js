@@ -28,10 +28,16 @@ function App() {
   return (
     <div className="App">
       <div className="topnav">
-        <select onChange={handleSelect}>
-          <option value="sightings">Animal Sightings</option>
-          <option value="animals">Species of Animals</option>
-          <option value="individuals">Individual Animals</option>
+        <select className="dropdown" onChange={handleSelect}>
+          <option className="dropdown-contents" value="sightings">
+            Animal Sightings
+          </option>
+          <option className="dropdown-contents" value="animals">
+            Species
+          </option>
+          <option className="dropdown-contents" value="individuals">
+            Individual Animals
+          </option>
         </select>
       </div>
       {selectedPage}

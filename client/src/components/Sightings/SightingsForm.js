@@ -84,7 +84,6 @@ const SightingsForm = (props) => {
         <input
           type="datetime-local"
           id="add-date-time"
-          placeholder="YYYY-MM-DD HR:MN:SC"
           required
           value={sighting.datetime}
           onChange={handleDateTime}
@@ -134,6 +133,10 @@ const SightingsForm = (props) => {
           value={sighting.emailsighter}
           onChange={handleEmailSighter}
         />
+        <p className="note">
+          *If the individual's nickname is not available, make sure that they
+          appear on the Individual Animals Page.
+        </p>
       </fieldset>
       <button type="submit">Add</button>
     </form>

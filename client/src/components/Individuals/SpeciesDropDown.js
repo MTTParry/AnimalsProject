@@ -14,8 +14,9 @@ const SpeciesDropDown = (prop) => {
   //Listing Species
   return (
     <div>
-      <label>Species</label>
-      <select classname="dropdowns" onChange={prop.handleSpecies} required>
+      <label>Species*</label>
+      {"      "}
+      <select onChange={prop.handleSpecies} required>
         <option hidden>Select</option>
         {animals.map((animal) => (
           <option value={animal.scientificname} key={animal.id}>

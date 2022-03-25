@@ -85,6 +85,8 @@ const AnimalsForm = (props) => {
         <input
           type="number"
           id="add-living-in-the-wild"
+          min={0}
+          placeholder="0"
           required
           value={animal.estimatedlivingwild}
           onChange={handleNumberLivingChange}
@@ -92,17 +94,36 @@ const AnimalsForm = (props) => {
         <br />
 
         <label>Conservation Status</label>
+        {"      "}
         <select name="consevationstatus" onChange={handleStatusChange} required>
           <option hidden>Select</option>
-          <option value="LC">LC - Least Concern</option>
-          <option value="NT">NC - Near Threatened</option>
-          <option value="VU">VU - Vulnerable</option>
-          <option value="EN">EN - Endangered</option>
-          <option value="CR">CR - Critically Endangered</option>
-          <option value="EW">EW - Extinct in the Wild</option>
-          <option value="EX">EX - Extinct</option>
-          <option value="DD">DD - Data Deficient</option>
-          <option value="NE">NE - Not Evaluated</option>
+          <option value="LC" key="1">
+            LC - Least Concern
+          </option>
+          <option value="NT" key="2">
+            NC - Near Threatened
+          </option>
+          <option value="VU" key="3">
+            VU - Vulnerable
+          </option>
+          <option value="EN" key="4">
+            EN - Endangered
+          </option>
+          <option value="CR" key="5">
+            CR - Critically Endangered
+          </option>
+          <option value="EW" key="6">
+            EW - Extinct in the Wild
+          </option>
+          <option value="EX" key="7">
+            EX - Extinct
+          </option>
+          <option value="DD" key="8">
+            DD - Data Deficient
+          </option>
+          <option value="NE" key="9">
+            NE - Not Evaluated
+          </option>
         </select>
         <br />
       </fieldset>

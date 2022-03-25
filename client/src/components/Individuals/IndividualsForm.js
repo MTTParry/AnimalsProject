@@ -64,6 +64,10 @@ const IndividualsForm = (props) => {
         <br />
 
         <SpeciesDropDown handleSpecies={handleSpecies} />
+        <p className="note">
+          *If the individual's species is not available, make sure that it
+          appears on the Species page.
+        </p>
       </fieldset>
       <button type="submit">Add</button>
     </form>

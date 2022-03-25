@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5e9c4;
 }
 
 code {
@@ -18,6 +19,7 @@ fieldset {
   line-height: 200%;
   align-self: center;
   margin: 5px 40px;
+  background-color: #fdfef9;
 }
 
 input {
@@ -25,17 +27,17 @@ input {
 }
 
 button {
-  background-color: #008CBA;
-  border: solid;
+  background-color: #008cba;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  font-style: bold;
 }
 
 .topnav {
-  background-color: lightgray;
+  background-color: #008cba;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -43,4 +45,21 @@ button {
 li {
   padding: 0% 10% 0% 10%;
   list-style-type: none;
+}
+
+.note {
+  font-style: italic;
+  font-size: small;
+  line-height: 100%;
+  color: #6e6e6e;
+}
+
+.dropdown {
+  background-color: #ffffff;
+  border: solid;
+  color: #008cba;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
 }
