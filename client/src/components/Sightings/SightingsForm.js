@@ -5,12 +5,12 @@ const SightingsForm = (props) => {
     datetime: "",
     individualnickname: "",
     location: "",
-    healthy: "",
+    healthy: null,
     emailsighter: "",
   };
 
-  const [sighting, setSighting] = useState({ emptySighting });
-
+  const [sighting, setSighting] = useState(emptySighting);
+  console.log(sighting)
   //create functions that handle the event of the user typing into the form
   const handleDateTime = (event) => {
     const datetime = event.target.value;
@@ -28,7 +28,7 @@ const SightingsForm = (props) => {
   };
 
   const handleHealthy = (event) => {
-    const healthy = event.target.value;
+    const healthy = strToBool(event.target.value);
     setSighting((sighting) => ({ ...sighting, healthy }));
   };
 
@@ -61,10 +61,7 @@ const SightingsForm = (props) => {
   };
 
   function strToBool(input) {
-    if (input === "true") {
-      return true;
-    }
-    return false;
+    return (input === "true");
   }
 
   return (

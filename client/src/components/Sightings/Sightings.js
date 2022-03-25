@@ -10,7 +10,7 @@ function Sightings() {
       .then((sightings) => {
         //setStudents((students[3]));
         //console.log("Testing", typeof students);
-        setSightings(sightings);
+        // setSightings(sightings);
       });
   }, []);
 

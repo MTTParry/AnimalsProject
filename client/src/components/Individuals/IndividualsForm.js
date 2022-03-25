@@ -7,8 +7,8 @@ const IndividualsForm = (props) => {
     species: "",
   };
 
-  const [individual, setIndividual] = useState({ emptyIndividual });
-
+  const [individual, setIndividual] = useState(emptyIndividual);
+  console.log(individual)
   //create functions that handle the event of the user typing into the form
   const handleNickName = (event) => {
     const nickname = event.target.value;
@@ -28,18 +28,27 @@ const IndividualsForm = (props) => {
       body: JSON.stringify(newIndividual),
     })
       .then((response) => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw response
+        }
       })
       .then((data) => {
         console.log("From the post ", data);
+        props.addIndividuals(data);
+      })
+      .catch( (e) => {
+        console.log(e)
+      })
+      .finally(() => {
+        setIndividual(emptyIndividual);
       });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await postIndividual(individual);
-    props.addIndividual(individual);
-    setIndividual(emptyIndividual);
   };
 
   return (

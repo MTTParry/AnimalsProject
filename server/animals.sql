@@ -16,6 +16,8 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE IF EXISTS animals;
+
 --
 -- Name: animals; Type: DATABASE; Schema: -; Owner: postgres
 --

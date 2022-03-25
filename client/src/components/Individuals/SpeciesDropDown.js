@@ -16,7 +16,7 @@ const SpeciesDropDown = (prop) => {
     <div>
       <select onChange={prop.handleSpecies}>
         {animals.map((animal) => (
-          <option value={animal.id} key={animal.id}>
+          <option value={animal.scientificname} key={animal.id}>
             {animal.commonname}
           </option>
         ))}

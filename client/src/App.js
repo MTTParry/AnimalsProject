@@ -8,15 +8,21 @@ const animalPage = <Animals />;
 const sightingsPage = <Sightings />;
 const individualsPage = <Individuals />;
 
+const Pages = Object.freeze({
+  individuals: "individuals",
+  animals: "animals",
+  sightings: "sightings"
+})
+
 function App() {
   // How to set pages
-  const [page, setPage] = useState("sightings");
+  const [page, setPage] = useState(Pages.sightings);
   let selectedPage;
-  if (page === "sightings") {
+  if (page === Pages.sightings) {
     selectedPage = sightingsPage;
-  } else if (page === "animals") {
+  } else if (page === Pages.animals) {
     selectedPage = animalPage;
-  } else if (page === "individuals") {
+  } else if (page === Pages.individuals) {
     selectedPage = individualsPage;
   }
 
@@ -29,9 +35,9 @@ function App() {
     <div className="App">
       <div className="topnav">
         <select onChange={handleSelect}>
-          <option value="sightings">Animal Sightings</option>
-          <option value="animals">Species of Animals</option>
-          <option value="individuals">Individual Animals</option>
+          <option value={Pages.sightings}>Animal Sightings</option>
+          <option value={Pages.animals}>Species of Animals</option>
+          <option value={Pages.individuals}>Individual Animals</option>
         </select>
       </div>
       {selectedPage}
