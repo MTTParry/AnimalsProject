@@ -23,7 +23,7 @@ function Sightings() {
   function boolToStr(input) {
     if (input === true) {
       return "healthy";
-    } else {
+    } else if (input === false) {
       return "not healthy";
     }
   }
@@ -37,8 +37,9 @@ function Sightings() {
             {sighting.individualnickname} was spotted in {sighting.location} at{" "}
             {sighting.datetime}.
             <br />
-            {sighting.individualnickname} appeared to be {boolToStr(sighting.healthy)}.
-            <br/>
+            {sighting.individualnickname} appeared to be{" "}
+            {boolToStr(sighting.healthy)}.
+            <br />
             To contact the spotter, please email them at {sighting.emailsighter}
             .<hr></hr>
           </li>

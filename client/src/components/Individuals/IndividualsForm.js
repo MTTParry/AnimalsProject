@@ -7,7 +7,7 @@ const IndividualsForm = (props) => {
     species: "",
   };
 
-  const [individual, setIndividual] = useState({ emptyIndividual });
+  const [individual, setIndividual] = useState(emptyIndividual);
 
   //create functions that handle the event of the user typing into the form
   const handleNickName = (event) => {
@@ -32,13 +32,20 @@ const IndividualsForm = (props) => {
       })
       .then((data) => {
         console.log("From the post ", data);
+        props.addIndividual(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setIndividual(emptyIndividual);
       });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await postIndividual(individual);
-    props.addIndividual(individual);
+    props.addIndividuals(individual);
     setIndividual(emptyIndividual);
   };
 
@@ -56,7 +63,6 @@ const IndividualsForm = (props) => {
         />
         <br />
 
-        <label>Species</label>
         <SpeciesDropDown handleSpecies={handleSpecies} />
       </fieldset>
       <button type="submit">Add</button>

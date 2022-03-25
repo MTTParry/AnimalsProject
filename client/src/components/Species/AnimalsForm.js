@@ -8,7 +8,7 @@ const AnimalsForm = (props) => {
     conservationstatus: "",
   };
 
-  const [animal, setAnimal] = useState({ emptyAnimal });
+  const [animal, setAnimal] = useState(emptyAnimal);
 
   //create functions that handle the event of the user typing into the form
   const handleCommonNameChange = (event) => {

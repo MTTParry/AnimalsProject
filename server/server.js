@@ -71,7 +71,7 @@ app.post("/api/animalindividuals", cors(), async (req, res) => {
   console.log([newIndividual.nickname, newIndividual.species]);
   const result = await db.query(
     "INSERT INTO individuals (nickname, species, CreationTimestamp) VALUES($1, $2, current_timestamp) RETURNING *",
-    [newIndividual.nickName, newIndividual.species]
+    [newIndividual.nickname, newIndividual.species]
   );
   console.log(result.rows[0]);
   res.json(result.rows[0]);

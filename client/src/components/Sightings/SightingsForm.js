@@ -9,32 +9,37 @@ const SightingsForm = (props) => {
     emailsighter: "",
   };
 
-  const [sighting, setSighting] = useState({ emptySighting });
+  const [sighting, setSighting] = useState(emptySighting);
 
   //create functions that handle the event of the user typing into the form
   const handleDateTime = (event) => {
     const datetime = event.target.value;
     setSighting((sighting) => ({ ...sighting, datetime }));
+    console.log(sighting);
   };
 
   const handleIndividualNickName = (event) => {
     const individualnickname = event.target.value;
     setSighting((sighting) => ({ ...sighting, individualnickname }));
+    console.log(sighting);
   };
 
   const handleLocation = (event) => {
     const location = event.target.value;
     setSighting((sighting) => ({ ...sighting, location }));
+    console.log(sighting);
   };
 
   const handleHealthy = (event) => {
-    const healthy = event.target.value;
+    const healthy = strToBool(event.target.value);
     setSighting((sighting) => ({ ...sighting, healthy }));
+    console.log(sighting);
   };
 
   const handleEmailSighter = (event) => {
     const emailsighter = event.target.value;
     setSighting((sighting) => ({ ...sighting, emailsighter }));
+    console.log(sighting);
   };
 
   //A function to handle the post request
@@ -107,7 +112,7 @@ const SightingsForm = (props) => {
         <input
           type="radio"
           id="healthy-individual"
-          value={strToBool("true")}
+          value="true"
           onChange={handleHealthy}
           name="health-status"
         />
@@ -117,7 +122,7 @@ const SightingsForm = (props) => {
         <input
           type="radio"
           id="unhealthy-individual"
-          value={strToBool("false")}
+          value="false"
           onChange={handleHealthy}
           name="health-status"
         />
